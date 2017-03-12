@@ -1,0 +1,20 @@
+{
+  "name": "modular-hapi-app-sketch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test tape 'tests/**/*.test.js' | tap-spec",
+    "start": "NODE_ENV=dev node src/server/index.js"
+  },
+  "author": "Elias Malik",
+  "license": "ISC",
+  "dependencies": {
+    "env2": "^2.1.1",
+    "glue": "^4.1.0",
+    "handlebars": "^4.0.6",
+    "hapi": "^15.2.0",
+    "inert": "^4.1.0",
+    "vision": "^4.1.1"
+  }
+}
