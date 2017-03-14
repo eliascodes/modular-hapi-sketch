@@ -24,8 +24,6 @@ fakePlugin.register.attributes = {
 
 
 app.name = config.name;
-app.path = __dirname;
-app.connection = config.connection;
 
 app.register = (server, options, next) => {
   // configure rendering engine

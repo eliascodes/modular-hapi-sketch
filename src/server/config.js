@@ -1,9 +1,11 @@
 'use strict';
 
 require('env2')('.env');
+const path = require('path');
 
 const defaultConfig = {
-  server: {}
+  server: {},
+  root: path.resolve(__dirname, '..'),
 };
 
 const configs = {

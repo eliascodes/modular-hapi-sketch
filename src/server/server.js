@@ -4,15 +4,9 @@ const path = require('path');
 const config = require('./config.js');
 
 const apps = [
-  '../apps/appOne',
-  '../apps/appTwo',
-].map(require);
-
-const connections = apps.map((app) => app.connection);
-const appPlugins = apps.map((app) => ({
-  plugin: app.path,
-  options: { select: app.connection.labels }
-}));
+  config.root + '/apps/appOne',
+  config.root + '/apps/appTwo',
+].map((s) => ({ plugin: s }));
 
 const globalPlugins = [
   { plugin: 'inert' },
@@ -25,6 +19,6 @@ const globalPlugins = [
 
 module.exports = {
   server: config.server,
-  connections,
-  registrations: globalPlugins.concat(appPlugins)
+  connections: [{ port: 8080 }],
+  registrations: globalPlugins.concat(apps)
 }
