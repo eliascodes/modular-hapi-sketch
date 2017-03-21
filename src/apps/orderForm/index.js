@@ -1,42 +1,17 @@
 'use strict';
 
 const path = require('path');
-const config = require('./config.js');
-const views = require('./views');
-const routes = require('./routes');
+const roles = require('../../constants/roles.js');
 
 const app = module.exports = {};
 
-const fakePlugin = {};
-fakePlugin.register = (server, options, next) => {
-  console.log('Registering');
+app.permissions = [ roles.USER, roles.ADMIN ];
+app.components = [ 'ui', 'email', 'session', 'user' ];
 
-  server.decorate('server', 'shout', () => {
-    console.log('AAAAAAAAHHH');
-  });
-
-  next();
-};
-
-fakePlugin.register.attributes = {
-  pkg: {name: 'lollololol'}
-};
-
-
-app.name = config.name;
-
-app.register = (server, options, next) => {
-  // configure rendering engine
-  server.views(views(config));
-
-  // register routes
-  server.route(routes(config));
-
-  server.register(fakePlugin, (err) => {
-    next(err);
-  });
-}
-
-app.register.attributes = {
-  pkg: { name: app.name }
+app.config = require('./config.js');
+app.routes = require('./routes')(app.config);
+app.views = {
+  path: path.join(app.config.root, 'views'),
+  partialsPath: path.join(app.config.root, 'views', 'partials'),
+  layoutPath: path.join(app.config.root, 'views', 'layout'),
 };

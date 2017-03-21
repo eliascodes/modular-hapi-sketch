@@ -5,6 +5,7 @@ module.exports = (config) =>
     {
       method: 'GET',
       path: '/',
-      handler: (request, reply) => reply.view('index')
+      config: { auth: false },
+      handler: (request, reply) => reply.view('index', {})
     }
   ];
